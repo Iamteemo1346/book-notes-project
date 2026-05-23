@@ -11,8 +11,6 @@ A full-stack book notes application built with Node.js, Express, PostgreSQL, and
 - Display book covers using ISBN
 - Sort books by rating, title, or date
 
----
-
 ## Technologies Used
 
 - Node.js
@@ -22,8 +20,6 @@ A full-stack book notes application built with Node.js, Express, PostgreSQL, and
 - dotenv
 - body-parser
 - axios
-
----
 
 ## Installation
 
