@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Notes</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <h1>My Book Notes</h1>
+
+  <form action="/add" method="POST" class="book-form">
+    <input type="text" name="title" placeholder="Book title" required>
+    <input type="text" name="author" placeholder="Author">
+    <input type="text" name="isbn" placeholder="ISBN for cover image">
+    <input type="number" name="rating" placeholder="Rating 1-10" min="1" max="10">
+    <input type="date" name="date_read">
+    <textarea name="review" placeholder="Write your review"></textarea>
+    <button type="submit">Add Book</button>
+  </form>
+
+  <div class="sort">
+    <a href="/?sort=date_read">Sort by Recent</a>
+    <a href="/?sort=rating">Sort by Rating</a>
+    <a href="/?sort=title">Sort by Title</a>
+  </div>
+
+  <div class="book-list">
+    <% books.forEach(book => { %>
+      <div class="book-card">
+        <img src="<%= getCoverUrl(book.isbn) %>" alt="Book Cover">
+
+        <div>
+          <h2><%= book.title %></h2>
+          <p><strong>Author:</strong> <%= book.author %></p>
+          <p><strong>Rating:</strong> <%= book.rating %>/10</p>
+          <p><strong>Date Read:</strong> <%= book.date_read ? book.date_read.toISOString().split('T')[0] : '' %></p>
+          <p><%= book.review %></p>
+
+          <a href="/edit/<%= book.id %>">Edit</a>
+
+          <form action="/delete" method="POST" class="delete-form">
+            <input type="hidden" name="id" value="<%= book.id %>">
+            <button type="submit">Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+</body>
+</html>
